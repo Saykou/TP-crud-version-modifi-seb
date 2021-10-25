@@ -1,7 +1,7 @@
 <?php require 'database.php';
 $id = null;
-if (!empty($_GET['microservice_id'])) {
-    $microservice_id = $_REQUEST['microservice_id'];
+if (!empty($_GET['id'])) {
+    $id = $_REQUEST['id'];
 }
 if (null == $id) {
     header("Location: index.php");
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     if (empty($contenu)) {
         $contenuError = 'Please enter contenu ';
         $valid = false;
-    } 
+    }
     if (empty($prix)) {
         $prixError = 'Please enter your prix';
         $valid = false;
@@ -73,13 +73,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     //     $urlError = 'Please enter website url';
     //     $valid = false;
     // }
-     // mise à jour des donnés
+    // mise à jour des donnés
     if ($valid) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $sql = "UPDATE microservices SET microservice_id = ?,titre = ?,auteur = ?,contenu = ?, prix = ?, categorie_id = ?, images = ? WHERE microservice_id = ?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($titre, $auteur, $contenu, $prix, $categorie_id,$microservice_id,$images));
+        $q->execute(array($titre, $auteur, $contenu, $prix, $categorie_id, $microservice_id, $images));
         Database::disconnect();
         header("Location: index.php");
     }
@@ -118,7 +118,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
         <div class="row">
             <h3>Modifier un contact</h3>
         </div>
-        <form method="post" action="update.php?id=<?php echo $microservice_id; ?>">
+        <form method="post" action="update.php?id=<?php echo $id; ?>">
             <div class="control-group <?php echo !empty($titreError) ? 'error' : ''; ?>">
                 <label class="control-label">Titre</label>
                 <div class="controls">
@@ -140,7 +140,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
             <div class="control-group<?php echo !empty($contenuError) ? 'error' : ''; ?>">
                 <label class="control-label">contenu</label>
                 <div class="controls">
-                    <input type="text" name="contenu" value="<?php echo !empty($contenu) ? $age : ''; ?>">
+                    <input type="text" name="contenu" value="<?php echo !empty($contenu) ? $contenu : ''; ?>">
                     <?php if (!empty($contenuError)) : ?>
                         <span class="help-inline"><?php echo $contenuError; ?></span>
                     <?php endif; ?>
@@ -158,7 +158,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
             <div class="control-group <?php echo !empty($categorie_idError) ? 'error' : ''; ?>">
                 <label class="control-label">categorie id</label>
                 <div class="controls">
-                    <input name="categorie_id" type="text"  value="<?php echo !empty($categorie_id) ? $categorie_id : ''; ?>">
+                    <input name="categorie_id" type="text" value="<?php echo !empty($categorie_id) ? $categorie_id : ''; ?>">
                     <?php if (!empty($categorie_idError)) : ?>
                         <span class="help-inline"><?php echo $categorie_idError; ?></span>
                     <?php endif; ?>
@@ -167,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
             <div class="control-group <?php echo !empty($imagesError) ? 'error' : ''; ?>">
                 <label class="control-label">images</label>
                 <div class="controls">
-                    <input name="images" type="text"  value="<?php echo !empty($images) ? $images : ''; ?>">
+                    <input name="images" type="text" value="<?php echo !empty($images) ? $images : ''; ?>">
                     <?php if (!empty($imagesError)) : ?>
                         <span class="help-inline"><?php echo $imagesError; ?></span>
                     <?php endif; ?>

@@ -1,8 +1,8 @@
 <?php require('database.php');
 //on appelle notre fichier de config
-$microservice_id= null;
-if (!empty($_GET['microservice_id'])) {
-    $microservice_id = $_REQUEST['microservice_id'];
+$id= null;
+if (!empty($_GET['id'])) {
+    $id = $_REQUEST['id'];
 }
 if (null == $id) {
     header("location:index.php");
@@ -11,7 +11,7 @@ if (null == $id) {
     $pdo = Database::connect();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION) . $sql = "SELECT * FROM microservices where microservice_id =?";
     $q = $pdo->prepare($sql);
-    $q->execute(array($microservice_id));
+    $q->execute(array($id));
     $data = $q->fetch(PDO::FETCH_ASSOC);
     Database::disconnect();
 }
@@ -29,6 +29,9 @@ if (null == $id) {
 </head>
 
 <body>
+    <?php
+    include('./inc/header.php');
+    ?>
     <div class="container">
         <div class="span10 offset1">
             <div class="row">

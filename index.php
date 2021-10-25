@@ -14,7 +14,9 @@
 </head>
 
 <body>
-
+    <?php
+    include('./inc/header.php');
+    ?>
     <div class="container">
         <div class="row">
             <h2>Crud en Php</h2>
@@ -67,7 +69,7 @@
                         // un autre td pour le bouton d'edition
                         echo '</td>';
                         echo '<td>';
-                        echo '<a class="btn btn-success" href="update.php?id=' . $row['microservice_id'] . '">Update</a>';
+                        echo '<a class="btn btn-success" href="./update.php?id=' . $row['microservice_id'] . '">Update</a>';
                         // un autre td pour le bouton d'update
                         echo '</td>';
                         echo '<td>';
@@ -84,6 +86,11 @@
             </div>
         </div>
     </div>
+                    
+    <?php
+    include('./inc/footer.php');
+    ?>
 </body>
+
 
 </html>

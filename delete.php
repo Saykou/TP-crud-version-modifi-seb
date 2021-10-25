@@ -30,6 +30,9 @@ if (!empty($_POST)) {
 </head>
 
 <body>
+    <?php
+    include('./inc/header.php');
+    ?>
     <div class="container">
         <div class="span10 offset1">
             <div class="row">
