@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     $contenu = $_POST['contenu'];
     $prix = $_POST['prix'];
     $categorie_id = $_POST['categorie_id'];
-    $image = $_POST['image'];
+    $image = $_POST['images'];
     // $pays = $_POST['pays'];
     // $comment = $_POST['comment'];
     // $metier = $_POST['metier'];
@@ -77,9 +77,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
     if ($valid) {
         $pdo = Database::connect();
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $sql = "UPDATE microservices SET microservice_id = ?,titre = ?,auteur = ?,contenu = ?, prix = ?, categorie_id = ?, images = ? WHERE microservice_id = ?";
+        $sql = "UPDATE microservices SET titre = ?,auteur = ?,contenu = ?, prix = ?, categorie_id = ?, images = ? WHERE microservice_id = ?";
         $q = $pdo->prepare($sql);
-        $q->execute(array($titre, $auteur, $contenu, $prix, $categorie_id, $microservice_id, $images));
+        $q->execute(array($titre, $auteur, $contenu, $prix, $categorie_id, $image, $id));
         Database::disconnect();
         header("Location: index.php");
     }
